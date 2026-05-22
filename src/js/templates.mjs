@@ -1,3 +1,5 @@
+import spritePath from '../images/sprite.symbol.svg';
+
 export function parkInfoTemplate(info) {
   return `<a href="${info.url}" class="hero-banner__title">${info.name}</a>
   <p class="hero-banner__subtitle">
@@ -40,6 +42,39 @@ export function getMailingAddress(addresses) {
 export function getVoicePhone(phoneNumbers) {
   const match = phoneNumbers.find((phone) => phone.type === "Voice");
   return match.phoneNumber;
+}
+
+export function alertTemplate(alert) {
+  const alertType = alert.category === "Park Closure"
+    ? "closure"
+    : alert.category.toLowerCase();
+  return `
+    <li class="alert-item">
+      <svg class="alert-item__icon" role="img" aria-label="${alert.category}">
+        <use xlink:href="${spritePath}#alert-${alertType}"></use>
+      </svg>
+      <div class="alert-item__content">
+        <h3 class="alert-item__title alert-${alertType}">${alert.title}</h3>
+        <p class="alert-item__description">${alert.description}</p>
+      </div>
+    </li>`;
+}
+
+export function visitorCenterTemplate(center) {
+  return `
+    <details class="visitor-center" name="visitor-center">
+      <summary class="visitor-center__summary">${center.name}</summary>
+      <div class="visitor-center__body">
+        <p class="visitor-center__description">${center.description}</p>
+        ${center.directionsInfo
+          ? `<p class="visitor-center__directions">${center.directionsInfo}</p>`
+          : ''}
+      </div>
+    </details>`;
+}
+
+export function activityTemplate(activity) {
+  return `<li class="activity-item">${activity.name}</li>`;
 }
 
 export function parkFooterTemplate(data) {
