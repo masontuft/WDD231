@@ -3,6 +3,7 @@ import "../css/home.css";
 import { getParkData, getInfoLinks } from "./parkService.mjs";
 import setHeaderFooter from "./setHeaderFooter.mjs";
 import { mediaCardTemplate } from "./templates.mjs";
+import { enableNavigation, enableSubmenus, setActiveParkNav } from "./navigation.mjs";
 
 function setParkIntro(data) {
   const introEl = document.querySelector(".intro");
@@ -16,29 +17,15 @@ function setParkInfoLinks(data) {
   infoEl.insertAdjacentHTML("afterbegin", html.join(""));
 }
 
-function enableNavigation() {
-  const toggleBtn = document.getElementById("global-nav-toggle");
-  const globalNav = document.querySelector(".global-nav");
-
-  toggleBtn.addEventListener("click", (ev) => {
-    let btn = ev.target;
-    if (btn.tagName !== "BUTTON") {
-      btn = btn.closest("button");
-    }
-
-    const isOpen = globalNav.classList.toggle("show");
-    btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    btn.setAttribute("aria-label", isOpen ? "Close Menu" : "Open Menu");
-  });
-}
-
 async function init() {
   const parkData = await getParkData();
   setHeaderFooter(parkData);
   setParkIntro(parkData);
   setParkInfoLinks(getInfoLinks(parkData.images));
+  enableNavigation();
+  enableSubmenus();
+  setActiveParkNav();
 }
 
 init();
-enableNavigation();
 

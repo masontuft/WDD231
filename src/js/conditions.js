@@ -3,6 +3,7 @@ import "../css/conditions.css";
 import { getParkData, getAlerts, getVisitorCenterData } from "./parkService.mjs";
 import setHeaderFooter from "./setHeaderFooter.mjs";
 import { alertTemplate, visitorCenterTemplate, activityTemplate } from "./templates.mjs";
+import { enableNavigation, enableSubmenus, setActiveParkNav } from "./navigation.mjs";
 
 function setAlerts(alerts) {
   const el = document.querySelector(".alert-list");
@@ -32,6 +33,9 @@ async function init() {
   setAlerts(alerts);
   setVisitorCenters(visitorCenters);
   setActivities(parkData.activities);
+  enableNavigation();
+  enableSubmenus();
+  setActiveParkNav();
 }
 
 init();

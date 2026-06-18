@@ -167,6 +167,12 @@
   background-color: transparent;
 }
 
+.park-nav a.active,
+.park-nav a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.15);
+  text-decoration: underline;
+}
+
 /* Global navigation */
 
 .global-nav {
@@ -252,6 +258,10 @@
   transition: max-height 0.3s;
 }
 
+.global-nav__submenu.open {
+  max-height: 500px;
+}
+
 .global-nav__submenu a {
   display: block;
   padding: 1rem 0.625rem;
@@ -259,6 +269,14 @@
 
 .global-nav__submenu a:hover {
   text-decoration: underline;
+}
+
+/* Focus states */
+
+.global-nav__toggle:focus-visible,
+.global-nav__split-button__toggle:focus-visible {
+  outline: 2px solid var(--bs-white);
+  outline-offset: 2px;
 }
 
 /* Toggle button label states */
